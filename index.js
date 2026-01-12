@@ -43,6 +43,8 @@ app.delete('/delete/:a', (req, res)=>{
     res.json(filtered);
 })
 
+
+
 app.patch('/update/:a/:withThis', (req, res)=>{
     const a = req.params.a; //helps up locate post with id
     const b = req.params.withThis; //parameters that will replace the message by that var
@@ -57,6 +59,17 @@ app.patch('/update/:a/:withThis', (req, res)=>{
         res.status(200).json(b);
     }
 })
+
+app.post("/register", (req, res)=>{
+    const user = req.body; //data sent by client
+    if(user.code === "Admintoko"){
+        res.status(200).json({success: true, message: "Authenticated!"});
+    }
+    else{
+        res.status(401).json({success: false, message: "Invalid Code, Cannot be Authenticated."});
+    }
+})
+
 
 app.listen(PORT, '0.0.0.0', ()=>{
     console.log(`Server running on: http://localhost:${PORT}/`);
